@@ -7,6 +7,7 @@ void setup() {
   pinMode(giallo,OUTPUT);  
   pinMode(bianco,OUTPUT);
   Serial.begin(9600);
+  randomSeed(analogRead(0));
 }
 
 void loop() {
@@ -18,7 +19,7 @@ void loop() {
   Serial.println(numCicli);
   }
   durata1=random(1000,5000);
-  durata2=random(1000,5000);
+  durata2=random(1000,5000);1
   while(numCicli>0)
   {
   digitalWrite(rosso, HIGH); 
