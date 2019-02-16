@@ -1,30 +1,26 @@
 int rosso=12,verde=10,bianco=8,giallo=6;
-int durata1=0,durata2=0;
-String rossogiallo="",biancoverde="";
+int durata1=0,durata2=0,numCicli=0;
+String cicli="";
 void setup() {
   pinMode(rosso,OUTPUT);
   pinMode(verde,OUTPUT);
   pinMode(giallo,OUTPUT);  
   pinMode(bianco,OUTPUT);
   Serial.begin(9600);
-  
 }
 
 void loop() {
-  Serial.println("per quanti millisecondi desideri far stare accesi il led rosso e il giallo?");
+  Serial.println("Quanti cicli desderi fare?");
   while(Serial.available()==0);
   if (Serial.available()>0){
-  rossogiallo=Serial.readString();
-  durata1=rossogiallo.toInt();
-  Serial.println(durata1);
+  cicli=Serial.readString();
+  numCicli=cicli.toInt();
+  Serial.println(numCicli);
   }
-  Serial.println("per quanti millisecondi desideri far stare accesi il led verde e il bianco?");
-  while(Serial.available()==0);
-  if (Serial.available()>0){
-  biancoverde=Serial.readString();
-  durata2=biancoverde.toInt();
-  Serial.println(durata2);
-  }
+  durata1=random(1000,5000);
+  durata2=random(1000,5000);
+  while(numCicli>0)
+  {
   digitalWrite(rosso, HIGH); 
   digitalWrite(giallo, HIGH);   
   delay(durata1);   
@@ -35,5 +31,6 @@ void loop() {
   delay(durata2);   
   digitalWrite(verde, LOW);
   digitalWrite(bianco, LOW);  
-  delay(1000);  
+  numCicli=numCicli-1;
+  }
 }
